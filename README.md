@@ -8,4 +8,4 @@ XR rig and model assembly in Unity by Wallaya Wattanagorn.
 
 UI interfaces and menus by Natalia Abreu.
 
-Scripting by me.
+Scripting and post processing by me.
