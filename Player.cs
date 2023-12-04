@@ -1,4 +1,4 @@
- using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,30 +12,25 @@ public class Player : MonoBehaviour
     [SerializeField] private const float decrease = 1f;
 
     private bool isHiding;
-    [SerializeField] private Collider tableCollider;
-    [SerializeField] private Collider ghostReachCollider;
-    [SerializeField] private Collider deadlyCollider;
+    [SerializeField] private Collider tableCollider; // trigger collider attached in unity to detect if the player managed to find the table to hide under
+    [SerializeField] private Collider ghostReachCollider; // how far the ghost will do extra damage on you
+    [SerializeField] private Collider deadlyCollider; // how close to the ghost you can get without dying
 
     private bool closeToGhost;
     private bool isDead;
 
-    //color adjustment vars
+    //color adjustment vars so i can use them in multiple methods
     private ColorAdjustments col;
     private Volume visualHealth;
-
-    private AudioSource found;
 
     // Start is called before the first frame update
     void Start()
     {
-        //Volume visualHealth = GetComponent<Volume>();
-       // visualHealth.profile.TryGet<ColorAdjustments>(out col);
     }
+    
     // Update is called once per frame
     void Update()
     {
-        AudioSource found = GetComponent<AudioSource>();
-
         Volume visualHealth = GetComponent<Volume>();
         visualHealth.profile.TryGet<ColorAdjustments>(out col);
 
@@ -44,8 +39,8 @@ public class Player : MonoBehaviour
         
         if (health <= 50)
         {
-            Debug.Log("FIFTY PERCENT!!!");
-            visualHealth.enabled = true;
+            Debug.Log("50%!");
+            visualHealth.enabled = true; // toggles the post processing for a color overlay telling the user that the health kept going down
             col.saturation.value = 0;
         }
         if (health <= 25)
@@ -77,7 +72,6 @@ public class Player : MonoBehaviour
             if (hitCollider == tableCollider)
             {
                 isHiding = true;
-                Debug.Log("you're hiding");
                 if (isHiding == true)
                 {
                     closeToGhost = false;
